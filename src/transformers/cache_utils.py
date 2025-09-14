@@ -112,10 +112,11 @@ class DynamicLayer(CacheLayerMixin):
         """
         # Lazy initialization
         if self.keys is None:
-            self.lazy_initialization(key_states)
-
-        self.keys = torch.cat([self.keys, key_states], dim=-2)
-        self.values = torch.cat([self.values, value_states], dim=-2)
+            self.keys = key_states
+            self.values = value_states
+        else:
+            self.keys = torch.cat([self.keys, key_states], dim=-2)
+            self.values = torch.cat([self.values, value_states], dim=-2)
         return self.keys, self.values
 
     def get_mask_sizes(self, cache_position: torch.Tensor) -> tuple[int, int]:
