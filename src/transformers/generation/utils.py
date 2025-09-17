@@ -2019,11 +2019,12 @@ class GenerationMixin(ContinuousMixin):
         # Use DynamicCache instance by default. This will avoid back and forth from legacy format that
         # keeps copying the cache thus using much more memory
         else:
-            model_kwargs[cache_name] = (
-                DynamicCache(**dynamic_cache_kwargs)
-                if not requires_cross_attention_cache
-                else EncoderDecoderCache(DynamicCache(**dynamic_cache_kwargs), DynamicCache(**dynamic_cache_kwargs))
-            )
+            print("past kv cache should be none")
+            #model_kwargs[cache_name] = (
+            #    DynamicCache(**dynamic_cache_kwargs)
+            #    if not requires_cross_attention_cache
+            #    else EncoderDecoderCache(DynamicCache(**dynamic_cache_kwargs), DynamicCache(**dynamic_cache_kwargs))
+            #)
 
     def _supports_logits_to_keep(self) -> bool:
         """
